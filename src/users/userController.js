@@ -51,6 +51,11 @@ exports.deleteUser = async (req, res) => {
 exports.loginUser = async (req, res) => {
     console.log("middleware passed and controller has been called")
     try {
+        if (req.authUser) {
+            console.log("token check passed and continue to persistant login")
+            res.status(200).send({username: req.authUser.username})
+            return
+        }
         const user = await User.findOne({username: req.body.username})
         const token = await jwt.sign({_id: user._id }, process.env.SECRET)
         res.status(200).send({username: user.username, token})

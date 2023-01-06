@@ -6,8 +6,9 @@ const userRouter = Router();
 
 userRouter.post("/createUser", hashPass, createUser);
 userRouter.post("/login",comparePass, loginUser);
-userRouter.get("/readUser",tokenCheck, readUsers);
-userRouter.put("/updateUser", updateUser);
+userRouter.get("/readUser", readUsers);
+userRouter.get("/authCheck", tokenCheck, loginUser) // endpoint for persistant login 
+userRouter.put("/updateUser",hashPass, updateUser);
 userRouter.delete("/deleteUser", deleteUser);
 
 
